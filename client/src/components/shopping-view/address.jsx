@@ -55,6 +55,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             setFormData(initialAddressFormData);
             toast({
               title: "Address updated successfully",
+              className: "bg-gray-400 text-white",
             });
           }
         })
@@ -69,6 +70,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             setFormData(initialAddressFormData);
             toast({
               title: "Address added successfully",
+              className: "bg-gray-400 text-white",
             });
           }
         });
@@ -82,6 +84,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
         dispatch(fetchAllAddresses(user?.id));
         toast({
           title: "Address deleted successfully",
+          className: "bg-gray-400 text-white",
         });
       }
     });
@@ -109,7 +112,6 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     dispatch(fetchAllAddresses(user?.id));
   }, [dispatch]);
 
-  console.log("ADDRESS LIST------>",addressList);
 
   return (
     <Card>

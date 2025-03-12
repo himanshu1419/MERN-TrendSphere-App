@@ -1,7 +1,6 @@
 # Dependencies
 /node_modules
-frontend/node_modules/
-
+backend/node_modules/
 
 # Build Output
 /build
@@ -9,8 +8,7 @@ frontend/node_modules/
 
 # Environment Variables
 .env
-.env.local
-frontend/.env.local
+backend/.env
 .env.development
 .env.production
 .env.test
@@ -32,9 +30,3 @@ Thumbs.db
 ehthumbs.db
 .vscode/
 .idea/
-
-# Firebase 
-firebase-debug.log
-firebase.json
-firebase.config.js
-frontend/src/firebase/firebase.config.js

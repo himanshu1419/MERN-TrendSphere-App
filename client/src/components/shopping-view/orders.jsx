@@ -89,7 +89,7 @@ function ShoppingOrders() {
                         >
                           View Details
                         </Button>
-                        <ShoppingOrderDetailsView orderDetails={orderDetails} />
+                        <ShoppingOrderDetailsView  orderDetails={orderDetails} />
                       </Dialog>
                     </TableCell>
                   </TableRow>

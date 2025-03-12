@@ -61,6 +61,10 @@ function AdminProducts() {
             setFormData(initialFormData);
             setOpenCreateProductsDialog(false);
             setCurrentEditedId(null);
+            toast({
+              title: "Product added successfully",
+              className: "bg-green-500 text-white",
+            });
           }
         })
       : dispatch(
@@ -75,7 +79,8 @@ function AdminProducts() {
             setImageFile(null);
             setFormData(initialFormData);
             toast({
-              title: "Product add successfully",
+              title: "Product added successfully",
+              className: "bg-green-500 text-white",
             });
           }
         });
@@ -85,6 +90,10 @@ function AdminProducts() {
     dispatch(deleteProduct(getCurrentProductId)).then((data) => {
       if (data?.payload?.success) {
         dispatch(fetchAllProducts());
+        toast({
+          title: "Product deleted successfully",
+          className: "bg-gray-400 text-white",
+        });
       }
     });
   }

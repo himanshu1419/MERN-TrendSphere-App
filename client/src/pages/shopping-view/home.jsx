@@ -3,16 +3,17 @@ import {
   Airplay,
   BabyIcon,
   ChevronLeftIcon,
+  Check,
   ChevronRightIcon,
-  CloudLightning,
-  Heater,
+  Heading,
+  LetterText,
   Images,
   Shirt,
-  ShirtIcon,
-  ShoppingBasket,
+  Sparkle,
   UmbrellaIcon,
-  WashingMachine,
+  UserRound,
   WatchIcon,
+  
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -29,20 +30,20 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 
 const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
+  { id: "men", label: "Men", icon: UserRound },
+  { id: "women", label: "Women", icon:  Shirt },
   { id: "kids", label: "Kids", icon: BabyIcon },
   { id: "accessories", label: "Accessories", icon: WatchIcon },
   { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
 ];
 
 const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
+  { id: "nike", label: "Nike", icon: Check },
+  { id: "adidas", label: "Adidas", icon: LetterText },
+  { id: "puma", label: "Puma", icon: Sparkle },
   { id: "levi", label: "Levi's", icon: Airplay },
   { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
+  { id: "h&m", label: "H&M", icon: Heading },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -85,6 +86,7 @@ function ShoppingHome() {
         dispatch(fetchCartItems(user?.id));
         toast({
           title: "Product is added to cart",
+          className: "bg-green-500 text-white",
         });
       }
     });

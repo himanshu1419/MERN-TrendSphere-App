@@ -115,6 +115,8 @@ function ShoppingListing() {
         dispatch(fetchCartItems(user?.id));
         toast({
           title: "Product is added to cart",
+          variant:"success",
+          className: "bg-green-500 text-white",
         });
       }
     });

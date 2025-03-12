@@ -59,6 +59,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
         dispatch(fetchCartItems(user?.id));
         toast({
           title: "Product is added to cart",
+          className: "bg-green-500 text-white",
         });
       }
     });
@@ -109,11 +110,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
       <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
         <div className="relative overflow-hidden rounded-lg">
           <img
-            src={productDetails?.image}
+           src={productDetails?.image.includes("http") 
+            ? productDetails.image 
+            : `/products/${productDetails?.image}`} 
             alt={productDetails?.title}
             width={600}
             height={600}
-            className="aspect-square w-full object-cover"
+             className="w-full h-[600px] object-fill rounded-t-lg"
           />
         </div>
         <div className="">

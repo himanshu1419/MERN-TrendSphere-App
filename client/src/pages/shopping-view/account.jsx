@@ -7,8 +7,8 @@ function ShoppingAccount() {
     <div className="flex flex-col">
       <div className="relative h-[300px] w-full overflow-hidden">
         <img
-          src='/account.jpg'
-          className="h-full w-full object-cover object-center"
+          src='/ecom1.avif'
+          className="h-full w-full object-fill"
         />
       </div>
       <div className="container mx-auto grid grid-cols-1 gap-8 py-8">

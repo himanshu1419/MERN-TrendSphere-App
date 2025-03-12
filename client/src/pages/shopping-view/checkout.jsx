@@ -98,7 +98,7 @@ function ShoppingCheckout() {
   return (
     <div className="flex flex-col">
       <div className="relative h-[300px] w-full overflow-hidden">
-        <img src='/account.jpg'className="h-full w-full object-cover object-center" />
+        <img src='/ecom1.avif' className="h-full w-11/12 object-fill mx-auto " />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 p-5">
         <Address

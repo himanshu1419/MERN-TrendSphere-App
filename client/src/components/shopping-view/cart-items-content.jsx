@@ -54,6 +54,7 @@ function UserCartItemsContent({ cartItem }) {
       if (data?.payload?.success) {
         toast({
           title: "Cart item is updated successfully",
+          className: "bg-gray-400 text-white",
         });
       }
     });

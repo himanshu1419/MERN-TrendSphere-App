@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { capturePayment } from "@/store/shop/order-slice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 function PaypalReturnPage() {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ function PaypalReturnPage() {
           sessionStorage.removeItem("currentOrderId");
           window.location.href = "/shop/payment-success";
         }
+        else{window.location.href = "/shop/payment-cancel";}
       });
     }
   }, [paymentId, payerId, dispatch]);

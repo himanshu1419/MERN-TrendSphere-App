@@ -20,7 +20,6 @@ const createOrder = async (req, res) => {
       cartId,
     } = req.body;
 
-    console.log("🟢 Received Order Request:", req.body);
 
     if (!cartItems || cartItems.length === 0) {
       return res.status(400).json({
@@ -54,7 +53,7 @@ const createOrder = async (req, res) => {
             total: totalAmount.toFixed(2),
           },
           payee: {
-            email: "sb-hq1rm37372123@business.example.com", // Replace with actual business PayPal email
+            email: process.env.EMAIL, 
           },
           description: "Your order payment",
         },
@@ -72,7 +71,6 @@ const createOrder = async (req, res) => {
         });
       }
 
-      console.log("✅ PayPal Payment Response:", JSON.stringify(paymentInfo, null, 2));
 
       const approvalLink = paymentInfo.links.find((link) => link.rel === "approval_url");
       if (!approvalLink) {
@@ -84,7 +82,7 @@ const createOrder = async (req, res) => {
       }
 
       const approvalURL = approvalLink.href;
-      console.log("🔗 Approval URL:", approvalURL);
+   
 
       // Only save the order if PayPal payment creation is successful
       const newlyCreatedOrder = new Order({
@@ -103,7 +101,7 @@ const createOrder = async (req, res) => {
       });
 
       await newlyCreatedOrder.save();
-      console.log("✅ Order Saved in Database:", newlyCreatedOrder._id);
+    
 
       res.status(201).json({
         success: true,
@@ -124,7 +122,6 @@ const capturePayment = async (req, res) => {
   try {
     const { paymentId, payerId, orderId } = req.body;
 
-    console.log("🔄 Capturing Payment:", { paymentId, payerId, orderId });
 
     let order = await Order.findById(orderId);
     if (!order) {
@@ -155,7 +152,7 @@ const capturePayment = async (req, res) => {
     await Cart.findByIdAndDelete(order.cartId);
     await order.save();
 
-    console.log("✅ Payment Captured & Order Confirmed:", orderId);
+
     res.status(200).json({
       success: true,
       message: "Order confirmed",
@@ -173,9 +170,8 @@ const capturePayment = async (req, res) => {
 const getAllOrdersByUser = async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log("📦 Fetching orders for user:", userId);
 
-    const orders = await Order.find({ userId });
+    const orders = await Order.find({ userId }).sort({ orderDate: -1 });
 
     if (!orders.length) {
       return res.status(404).json({
@@ -200,7 +196,6 @@ const getAllOrdersByUser = async (req, res) => {
 const getOrderDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("🔍 Fetching order details:", id);
 
     const order = await Order.findById(id);
 

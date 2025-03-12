@@ -43,7 +43,7 @@ function AdminOrderDetailsView({ orderDetails }) {
   }
 
   return (
-    <DialogContent className="sm:max-w-[600px]">
+    <DialogContent className="sm:max-w-[600px] h-[700px] overflow-y-auto">
       <div className="grid gap-6">
         <div className="grid gap-2">
           <div className="flex mt-6 items-center justify-between">
@@ -75,7 +75,11 @@ function AdminOrderDetailsView({ orderDetails }) {
                     ? "bg-green-500"
                     : orderDetails?.orderStatus === "rejected"
                     ? "bg-red-600"
-                    : "bg-black"
+                    : orderDetails?.orderStatus === "pending"
+                    ? "bg-red-400"
+                    : orderDetails?.orderStatus === "delivered"
+                    ? "bg-green-600"
+                    : "bg-yellow-500"
                 }`}
               >
                 {orderDetails?.orderStatus}
