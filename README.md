@@ -1,0 +1,1 @@
+# MERN-TrendSphere-App
