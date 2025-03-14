@@ -64,11 +64,15 @@ const loginUser = async (req, res) => {
         email: checkUser.email,
         userName: checkUser.userName,
       },
-      "CLIENT_SECRET_KEY",
+      process.env.JWT_SECRET,
       { expiresIn: "60m" }
     );
 
-    res.cookie("token", token, { httpOnly: true, secure: false }).json({
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // Change to false only for local testing
+      sameSite: "None", // Required for cross-origin requests
+    }).json({
       success: true,
       message: "Logged in successfully",
       user: {
@@ -89,32 +93,41 @@ const loginUser = async (req, res) => {
 
 //logout
 
-const logoutUser = (req, res) => {
-  res.clearCookie("token").json({
-    success: true,
-    message: "Logged out successfully!",
+const logoutUser = (req, res) =>{
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
   });
+  req.session = null; 
+  return res.json({ success: true, message: "Logged out" });
 };
 
 //auth middleware
 const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token;
-  if (!token)
+  console.log("Token received:", token);
+  console.log("JWT Secret Key:", process.env.JWT_SECRET);
+  
+  if (!token) {
     return res.status(401).json({
       success: false,
-      message: "Unauthorised user!",
+      message: "Unauthorised user! Token missing.",
     });
-
+  }
+  
   try {
-    const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
+    console.error("JWT Verification Error:", error.message);
     res.status(401).json({
       success: false,
-      message: "Unauthorised user!",
+      message: "Unauthorised user! Invalid or expired token.",
     });
   }
+  
 };
 
 module.exports = { registerUser, loginUser, logoutUser, authMiddleware };

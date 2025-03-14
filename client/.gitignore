@@ -38,3 +38,4 @@ firebase-debug.log
 firebase.json
 firebase.config.js
 frontend/src/firebase/firebase.config.js
+.vercel
